@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>vue-master-detail-demo</title>
+  </head>
+  <body>
+    <script type="text/x-template" id="hero-list">
+      <div id="hero-list" class="border">
+        <div v-for="hero in heroList" class="border-botton" v-on:click="onSelectedHero(hero)">{{hero.Name}}</div>
+      </div>
+    </script>
+    <script type="text/x-template" id="hero-detail">
+      <div id="hero-detail" v-if="isValid()">
+          <div>Name: </div>
+          <div>{{selectedHero.Name}}</div>
+          <div>Power: </div>
+          <div>{{selectedHero.Power}}</div>
+      </div>
+    </script>
+    <div id="app">
+      <hero-list
+        v-bind:hero-list="heroList"
+        v-on:hero-selected="onSelectedHero($event)"
+      ></hero-list>
+      <hero-detail v-if="isValid()" v-bind:selected-hero="selectedHero"></hero-detail>
+    </div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

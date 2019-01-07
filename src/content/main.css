@@ -1,0 +1,9 @@
+.border {
+  border-color: gray;
+  border-width: 1px;
+}
+
+.border-botton {
+  border-bottom-color: black;
+  border-bottom-style: dashed;
+}
