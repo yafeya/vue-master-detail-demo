@@ -4,6 +4,7 @@ import Vue from 'vue';
 import Hero from './models/hero';
 import './components/hero-list';
 import './components/hero-detail';
+import './components/hero-update';
 
 require('./content/main.css');
 
@@ -13,6 +14,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   data: {
+    title: String,
     selectedHero: new Hero(),
     heroList: [
       new Hero('Captain America', 'Super Soldier'),
@@ -22,6 +24,9 @@ new Vue({
       new Hero('Halk Eye', 'Arrow Sniper'),
       new Hero('Black Widow', 'Expert of fighting & interrogating')
     ]
+  },
+  mounted: function() {
+    this.title = 'World Peace';
   },
   methods: {
     onSelectedHero: function(event) {

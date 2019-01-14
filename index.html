@@ -4,28 +4,67 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>vue-master-detail-demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
+    <style>
+      .title {
+        display: block;
+      }
+      .line-items > div {
+        display: inline-block;
+      }
+      .master-item {
+        width: 30%;
+        border-width: 2px;
+        border-color: red;
+        border-style: solid;
+      }
+      .detail-item {
+        width: 60%;
+        border-width: 2px;
+        border-color: seagreen;
+        vertical-align: top;
+        border-style: solid;
+      }
+    </style>
     <script type="text/x-template" id="hero-list">
-      <div id="hero-list" class="border">
+      <div id="hero-list" class="master-item border">
         <div v-for="hero in heroList" class="border-botton" v-on:click="onSelectedHero(hero)">{{hero.Name}}</div>
       </div>
     </script>
     <script type="text/x-template" id="hero-detail">
-      <div id="hero-detail" v-if="isValid()">
+      <div id="hero-detail" class="detail-item" v-if="isValid()">
           <div>Name: </div>
           <div>{{selectedHero.Name}}</div>
           <div>Power: </div>
-          <div>{{selectedHero.Power}}</div>
+          <div id="hero-power">{{selectedHero.Power}}</div>
+      </div>
+    </script>
+    <script type="text/x-template" id="hero-update">
+      <div id="hero-update">
+        <div id="current-power"></div>
+        <div>
+          <span>New Power:</span>
+          <input type="text" v-model="power">
+          <input type="button" v-on:click="update()" value="UPDATE">
+        </div>
       </div>
     </script>
     <div id="app">
-      <hero-list
-        v-bind:hero-list="heroList"
-        v-on:hero-selected="onSelectedHero($event)"
-      ></hero-list>
-      <hero-detail v-if="isValid()" v-bind:selected-hero="selectedHero"></hero-detail>
+      <div class="title">
+          <span v-text="title"></span>
+      </div>
+      <div class="line-items">
+          <hero-list
+          v-bind:hero-list="heroList"
+          v-on:hero-selected="onSelectedHero($event)"
+        ></hero-list>
+        <hero-detail v-if="isValid()" v-bind:selected-hero="selectedHero"></hero-detail>
+      </div>
+      <div>
+          <hero-update v-bind:selected-hero="selectedHero"></hero-update>
+      </div>
     </div>
-    <!-- built files will be auto injected -->
   </body>
 </html>
